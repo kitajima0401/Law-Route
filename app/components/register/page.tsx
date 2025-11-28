@@ -7,7 +7,7 @@ const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault()
     try{
       const response = await fetch("http://localhost:3000/api/user/register",{
