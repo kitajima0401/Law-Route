@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import Results from "@/app/components/Results/Results"
+import Results from "@/app/components/Results"
 
 const Homepage = () => {
   const [keyword, setKeyword] = useState<string>("")
