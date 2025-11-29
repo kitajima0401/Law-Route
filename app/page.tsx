@@ -6,7 +6,7 @@ import { useEffect } from "react"
 export default function Home() {
   const router = useRouter()
   useEffect(()=>{
-    router.push("/components/Homepage")
+    router.push("/pages/Homepage")
   },[router])
   return (
     <div>リダイレクト中...</div>
