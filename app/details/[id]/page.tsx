@@ -5,7 +5,7 @@ type Props = {
 }
 
 const LawDetail = async({ params }: Props) => {
-  const law_id = await params.id
+  const law_id = params.id
   const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getLawDetails`,{
       method: "POST",
       headers: { 
