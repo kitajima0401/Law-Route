@@ -33,7 +33,7 @@ const Results = ({results, keyword, isLoading}: Props) => {
                   <div key={i} 
                   className="mt-4 p-5 bg-blue-50 border-l-4 border-blue-700 rounded-r-lg 
               text-gray-800 leading-8 text-base
-                break-words overflow-hidden"
+                wrap-break-word overflow-hidden"
                   dangerouslySetInnerHTML={{ __html: s.text }}
                   />
                 )}
