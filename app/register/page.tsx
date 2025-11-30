@@ -30,7 +30,7 @@ const Register = () => {
   }
 
   return(
-    <div>
+    <div className="pt-8">
       <title>登録ページ</title>
       <h1>ユーザー登録</h1>
       <form onSubmit={handleSubmit} >

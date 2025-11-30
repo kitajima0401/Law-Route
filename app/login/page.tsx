@@ -30,7 +30,7 @@ const Login = () => {
   }
 
   return(
-    <div>
+    <div className="pt-8">
       <title>ログインページ</title>
       <h1>ログイン</h1>
       <form onSubmit={handleSubmit}>
