@@ -4,10 +4,6 @@ const Schema = mongoose.Schema
 
 const ItemSchema = new Schema({
   law_id: String,
-  law_num: String,
-  law_title: String,
-  category: String,
-  sentences: [],
 })
 
 const UserSchema = new Schema({
