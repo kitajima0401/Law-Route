@@ -5,8 +5,12 @@ import Results from "@/app/components/Results"
 const Homepage = () => {
   const [keyword, setKeyword] = useState<string>("")
   const [results, setResults] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
+    setResults(null)
     try{
       const res = await fetch(`https://laws.e-gov.go.jp/api/2/keyword?keyword=${keyword}`)
       const data = await res.json()
@@ -14,6 +18,8 @@ const Homepage = () => {
       setResults(data)
     }catch(err){
       alert("検索に失敗しました")
+    }finally{
+      setIsLoading(false)
     }
     
   }
@@ -37,7 +43,7 @@ const Homepage = () => {
           </button>
         </div>
         </form>
-        <Results results={results?.items ?? []} keyword={keyword} />
+        <Results results={results?.items ?? []} keyword={keyword} isLoading={isLoading} />
       </div>
     </div>
   )

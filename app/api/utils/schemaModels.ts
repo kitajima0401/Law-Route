@@ -3,9 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const ItemSchema = new Schema({
-  title: String,
-  description: String,
-  email: String
+  law_id: String,
+  law_num: String,
+  law_title: String,
+  category: String,
+  sentences: [],
 })
 
 const UserSchema = new Schema({
