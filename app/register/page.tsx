@@ -30,15 +30,17 @@ const Register = () => {
   }
 
   return(
-    <div className="pt-8">
-      <title>登録ページ</title>
-      <h1>ユーザー登録</h1>
-      <form onSubmit={handleSubmit} >
-        <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="ユーザーネーム"  required/>
-        <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="メールアドレス"  required/>
-        <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="パスワード"  required/>
-        <button>登録</button>
-      </form>
+    <div className="pt-8 bg-gray-50 py-12 px-4">
+      <div className="max-w-md mx-auto">
+        <title>登録ページ</title>
+        <h1>ユーザー登録</h1>
+        <form onSubmit={handleSubmit} >
+          <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="ユーザーネーム"  required/>
+          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="メールアドレス"  required/>
+          <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="パスワード"  required/>
+          <button>登録</button>
+        </form>
+      </div>
     </div>
   )
 }
