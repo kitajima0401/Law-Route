@@ -1,8 +1,14 @@
 "use client"
 
-
+import useAuth from "../api/utils/useAuth"
 
 const Mypage = () => {
+  const userEmail  = useAuth()
+
+  if(!userEmail){
+    return alert("ログインしてください")
+  }
+  
   return(
     <div>
       <div>

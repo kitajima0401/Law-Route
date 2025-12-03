@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import useAuth from "../api/utils/useAuth"
 
 type Props = {
   results: any[] | null,
@@ -8,6 +9,7 @@ type Props = {
 }
 
 const Results = ({results, keyword, isLoading}: Props) => {
+  
   if(isLoading){
     return(
       <div>検索中...</div>
@@ -17,7 +19,9 @@ const Results = ({results, keyword, isLoading}: Props) => {
   if(!results || results.length === 0){
     return null
   }
+
   
+
   return(
     <>
       <div>
@@ -45,7 +49,7 @@ const Results = ({results, keyword, isLoading}: Props) => {
                   <Link className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition" href={`${process.env.NEXT_PUBLIC_URL}/LawDetailPage/${result.revision_info.law_revision_id}`}>
                     本文を表示
                   </Link>
-                  <button className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</button>
+                  <Link href={`${process.env.NEXT_PUBLIC_URL}/mypage`} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</Link>
                 </div>
 
               </div>

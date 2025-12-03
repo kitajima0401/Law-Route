@@ -9,7 +9,7 @@ const useAuth = () => {
     const checkToken = async() => {
       const token = localStorage.getItem("token")
       if(!token){
-        router.push("/pages/login")
+        router.push("/login")
         return
       }
       try{
@@ -17,7 +17,7 @@ const useAuth = () => {
         const decodedJwt = await jwtVerify(token, secretKey)
         setLoginUserEmail(decodedJwt.payload.email as string)
       }catch(err){
-        router.push("/pages/login")
+        router.push("/login")
         return
       }
     }
