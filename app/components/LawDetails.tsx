@@ -4,10 +4,20 @@ import { useEffect, useState } from "react"
 type Props = {
   law_revision_id: string
 }
-
+type LawResponse = {
+  revision_info: {
+    law_title: string;
+    abbrev?: string;
+    amendment_law_title?: string;
+    amendment_enforcement_date?: string;
+  };
+  law_full_text: {
+    children: any[];
+  };
+};
 
 const LawDetails = ({law_revision_id}: Props) => {
-  const [LawData, setLawData] = useState(null)
+  const [LawData, setLawData] = useState<LawResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
