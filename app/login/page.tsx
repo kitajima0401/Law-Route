@@ -30,15 +30,23 @@ const Login = () => {
   }
 
   return(
-    <div className="pt-8">
-      <title>ログインページ</title>
-      <h1>ログイン</h1>
-      <form onSubmit={handleSubmit}>
-        <input value={email} placeholder="メールアドレス" onChange={(e)=>setEmail(e.target.value)} type="email" required/>
-        <input value={password} placeholder="パスワード" onChange={(e)=>setPassword(e.target.value)} type="password" required/>
-        <button>ログイン</button>
-      </form>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200"> 
+
+          <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">ログイン</h1>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <input value={email} placeholder="メールアドレス" onChange={(e)=>setEmail(e.target.value)} type="email" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"/>
+
+            <input value={password} placeholder="パスワード" onChange={(e)=>setPassword(e.target.value)} type="password" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"/>
+            
+            <button type="submit" className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">ログイン</button>
+          </form>
+        </div>
+      </div>
     </div>
+    
   )
 }
 

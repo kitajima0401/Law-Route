@@ -30,16 +30,23 @@ const Register = () => {
   }
 
   return(
-    <div className="pt-8 bg-gray-50 py-12 px-4">
-      <div className="max-w-md mx-auto">
-        <title>登録ページ</title>
-        <h1>ユーザー登録</h1>
-        <form onSubmit={handleSubmit} >
-          <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="ユーザーネーム"  required/>
-          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="メールアドレス"  required/>
-          <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="パスワード"  required/>
-          <button>登録</button>
-        </form>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+
+          <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">ユーザー登録</h1>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="ユーザーネーム"  required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"/>
+
+            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="メールアドレス"  required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"/>
+
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="パスワード"  required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"/>
+
+            <button type="submit" className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">登録</button>
+
+          </form>
+        </div>
       </div>
     </div>
   )

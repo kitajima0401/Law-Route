@@ -28,24 +28,26 @@ const Homepage = () => {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Law Route</h1>
         <p className="text-lg text-gray-600 text-center mb-10">キーワードを入力して、法令を検索できます。</p>
+
         <form onSubmit={handleSubmit} className="mb-12">
           <div className="flex justify-center gap-4 mb-12">
-          <input
-            placeholder="検索したい用語を入力してください。例: 個人情報保護"
-            value={keyword}
-            type="text"
-            onChange={(e) => setKeyword(e.target.value)}
-            className="w-full max-w-2xl px-6 py-4 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-100 transition-shadow placeholder-gray-500"
-            required
-          />
-          <select>
-            <option></option>
-          </select>
-          <button className="px-10 py-4 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 active:bg-blue-900 transition shadow-md whitespace-nowrap">
-            検索
-          </button>
-        </div>
+            <input
+              placeholder="検索したい用語を入力してください。例: 個人情報保護"
+              value={keyword}
+              type="text"
+              onChange={(e) => setKeyword(e.target.value)}
+              className="w-full max-w-2xl px-6 py-4 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-100 transition-shadow placeholder-gray-500"
+              required
+            />
+
+
+            <button className="px-10 py-4 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 active:bg-blue-900 transition shadow-md whitespace-nowrap">
+              検索
+            </button>
+
+          </div>
         </form>
+
         <Results results={results?.items ?? []} keyword={keyword} isLoading={isLoading} />
       </div>
     </div>
