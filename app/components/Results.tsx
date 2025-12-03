@@ -1,6 +1,5 @@
 "use client"
-import { useState } from "react"
-import LawDetails from "./LawDetails"
+import Link from "next/link"
 
 type Props = {
   results: any[] | null,
@@ -9,7 +8,6 @@ type Props = {
 }
 
 const Results = ({results, keyword, isLoading}: Props) => {
-const [openFullText, setOpenFullText] = useState<boolean>(false)
 
 
   if(isLoading){
@@ -41,12 +39,9 @@ const [openFullText, setOpenFullText] = useState<boolean>(false)
                   />
                 )}
                 <div className="mt-8 text-right">
-                  <button 
-                  className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition"
-                  onClick={()=>{setOpenFullText(true)}}>本文を表示</button>
-                  {openFullText === true ?
-                    <LawDetails law_id={result.law_info.law_num}/>: null
-                  }
+                  <Link href={`${process.env.NEXT_PUBLIC_URL}/LawDetailPage/${result.revision_info.law_revision_id}`}>
+                    本文を表示
+                  </Link>
                   <button className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</button>
                 </div>
               </div>
