@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function proxy(request: NextRequest){
-  const token = await request.headers.get("Authorization")?.split(" ")[1]
+  const token = request.headers.get("Authorization")?.split(" ")[1]
   if(!token){
     return NextResponse.json({message: "トークンがありません"})
   }
