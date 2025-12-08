@@ -3,7 +3,14 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const ItemSchema = new Schema({
-  law_id: String,
+  law_id: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
 })
 
 const UserSchema = new Schema({
