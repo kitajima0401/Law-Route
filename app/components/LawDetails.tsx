@@ -60,43 +60,43 @@ const LawDetails = ({law_revision_id}: Props) => {
 
     switch(tag){
       case "LawTitle":
-        return <h1 className="text-3xl font-bold text-center my-10">{children.map(renderNode)}</h1>;
+        return <h1 key={`title-${attr.Num}`} className="text-3xl font-bold text-center my-10">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</h1>;
 
       case "ChapterTitle":
-        return <h2 className="text-2xl font-bold mt-12 mb-6 text-blue-900 border-b-2 border-blue-200 pb-2">{children.map(renderNode)}</h2>;
+        return <h2 key={`chapter-title-${attr.Num}`} className="text-2xl font-bold mt-12 mb-6 text-blue-900 border-b-2 border-blue-200 pb-2">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</h2>;
 
       case "ArticleTitle":
-        return <span className="text-xl font-bold text-red-900 mr-3">{children.map(renderNode)}</span>;
+        return <span key={`article-title-${attr.Num}`} className="text-xl font-bold text-red-900 mr-3">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</span>;
 
       case "ArticleCaption":
-        return <span className="text-sm text-gray-600">（{children.map(renderNode)}）</span>;
+        return <span key={`article-caption-${attr.Num}`} className="text-sm text-gray-600">（{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}）</span>;
 
       case "Article":
         return (
-          <section className="my-10 pl-6 border-l-8 border-blue-600 bg-blue-50 p-6 rounded-r-lg">
+          <section key={`article-${attr.Num}`} className="my-10 pl-6 border-l-8 border-blue-600 bg-blue-50 p-6 rounded-r-lg">
             <div className="flex flex-wrap items-baseline gap-2">
-              {children.map(renderNode)}
+              {children.map((child: any, i: number)=><div key={i}>{renderNode(child)}</div>)}
             </div>
           </section>
         );
         case "Paragraph":
           const num = attr.Num && attr.Num !== "1" ? `${attr.Num}`: ""
           return(
-            <div className="my-4 leading-8 text-lg">
+            <div key={`paragraph-${attr.Num}`} className="my-4 leading-8 text-lg">
               {num && <span className="font-medium">{num}</span>}
-              {children.map(renderNode)}
+              {children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}
             </div>
           )
         case "ParagraphSentence":
         case "Sentence":
-          return <>{children.map(renderNode)}</>;
+          return <span key={`sentence-${attr.Num}`} >{children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}</span>;
         case "Chapter":
         case "MainProvision":
         case "LawBody":
-          return <div className="space-y-4">{children.map(renderNode)}
+          return <div key={`law-body-${attr.Num}`} className="space-y-4">{children.map((child: any, i: number)=><div key={i}>{renderNode(child)}</div>)}
           </div>;
         default:
-          return <>{children.map(renderNode)}</>
+          return <>{children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}</>
     }
   }
   return(
@@ -122,7 +122,6 @@ const LawDetails = ({law_revision_id}: Props) => {
       </div>
     </article>
   )
-  
 }
 
 export default LawDetails

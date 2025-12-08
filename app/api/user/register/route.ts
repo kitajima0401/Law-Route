@@ -7,7 +7,7 @@ export async function POST(request: NextRequest){
   try{
     await connectDB()
     const savedUserEmail = await UserModel.findOne({email: reqBody.email})
-    if(savedUserEmail === reqBody.email){
+    if(savedUserEmail){
       return NextResponse.json({message: "該当メールアドレスのユーザーは既に存在します"})
     }
     await UserModel.create(reqBody)

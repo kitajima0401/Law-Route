@@ -1,5 +1,5 @@
 "use client"
-
+import useAuth from "@/app/api/utils/useAuth"
 
 const Mypage = () => {
   
