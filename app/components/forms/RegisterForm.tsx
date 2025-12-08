@@ -20,7 +20,9 @@ export default function RegisterForm(){
 
   const onSubmit = async(data: RegisterSchema) => {
     setIsLoading(true)
+    console.log("Form data submitted:", data); 
     try{
+      console.log("Attempting to fetch API at:", "/api/user/register"); 
       const res = await fetch("/api/user/register",{
         method: "POST",
         headers: {
@@ -28,16 +30,21 @@ export default function RegisterForm(){
         },
         body: JSON.stringify(data)
       })
+      console.log("API response status:", res.status); 
       const jsonData = await res.json()
+      console.log("API response body:", jsonData);
       if(!res.ok){
+        console.error("API error detected:", jsonData.message); 
         throw new Error(jsonData.message)
       }
       toast.success("登録成功 ログインしてください")
       router.push("/login")
     }catch(err: any){
+      console.error("Fetch operation failed:", err.message)
       toast.error(err.message)
     }finally{
       setIsLoading(false)
+      console.log("Submit process finished.")
     }
   }
 
