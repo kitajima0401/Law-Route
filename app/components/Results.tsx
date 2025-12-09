@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import useAuth from "../api/utils/useAuth"
+
 
 type Props = {
   results: any[] | null,
