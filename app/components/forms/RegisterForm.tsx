@@ -50,7 +50,6 @@ export default function RegisterForm(){
 
   return(
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
-      <h2 className="text-xl font-semibold">新規登録</h2>
       <div>
         <input {...register("name")} placeholder="名前" className="border p-2 w-full" disabled={isLoading}/>
         {errors.name&&<p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
