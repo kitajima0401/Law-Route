@@ -33,6 +33,7 @@ export default function LoginForm(){
       })
 
       const jsonData = await res.json()
+      console.log("API response body:", jsonData)
 
       if(!res.ok){
         throw new Error(jsonData.message)
