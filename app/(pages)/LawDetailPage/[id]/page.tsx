@@ -1,15 +1,11 @@
 "use client"
 import LawDetails from "@/app/components/LawDetails";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import {use} from "react"
 
 
 export default function LawDetailPage({params}: {params: Promise<{id: string}>}){
   const { id } = use(params)
-  if(!id){
-    notFound()
-  }
   return(
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto py-12 px-6">
