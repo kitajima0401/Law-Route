@@ -29,14 +29,14 @@ const lawItems = [
   },
 ]
 
-const AccordionItem = ({subject}) => {
+const AccordionItem = ({subject}:any) => {
   const [isOpen, setIsOpen] = useState(false)
   return(
     <div className="border-b border-gray-700">
       <button className="flex justify-between items-center w-full p-4 text-left bg-white hover:bg-gray-700 hover:text-white focus:outline-none" type="submit" onClick={()=>setIsOpen(!isOpen)}>{subject.title}</button>
       {isOpen && 
         <div className="p-4 bg-gray-900">
-          <ul className="space-y-2">{subject.items.map((item, index)=>(
+          <ul className="space-y-2">{subject.items.map((item:string, index:number)=>(
             <li key={index} className="text-white hover:text-white cursor-pointer transition duration-150">
               {item}
             </li>
