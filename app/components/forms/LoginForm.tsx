@@ -44,11 +44,11 @@ export default function LoginForm(){
       localStorage.setItem("token", jsonData.token)
 
       toast.success("ログイン成功")
+      router.push("/mypage")
     }catch(err: any){
       toast.error(err.message)
     }finally{
       setIsLoading(false)
-      router.push("/mypage")
     }
   }
 

@@ -267,15 +267,15 @@ const lawItems = [
 const  SubAccordionItem = ({sub}: {sub: typeof lawItems[number]["items"][number]}) =>{
   const [isOpen, setIsOpen] = useState(false)
   return(
-    <div className="mb-2">
-      <button onClick={()=>setIsOpen(!isOpen)} className="w-full text-left px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded flex justify-between items-center">
+    <div className="border-b border-gray-200 last:border-b-0">
+      <button onClick={()=>setIsOpen(!isOpen)} className="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-gray-50 transition-colors font-medium text-gray-800">
         {sub.subTitle}
         <span>{isOpen ? '▲' : '▼'}</span>
       </button>
       {isOpen && (
-        <ul className="pl-8 pt-2 space-y-1">
+        <ul className="bg-gray-500 px-6 py-3 space-y-2">
           {sub.topics.map((topic, index)=>(
-            <li key={index} className="text-gray-200 hover:text-white cursor-pointer transition duration-150">
+            <li key={index} className="text-white hover:bg-white hover:text-black">
               ・{topic}
             </li>
           ))}
@@ -288,13 +288,13 @@ const  SubAccordionItem = ({sub}: {sub: typeof lawItems[number]["items"][number]
 const AccordionItem = ({subject}:{subject: typeof lawItems[number]}) => {
   const [isOpen, setIsOpen] = useState(false)
   return(
-    <div className="border-b border-gray-700">
-      <button className="flex justify-between items-center w-full p-4 text-left bg-white hover:bg-gray-700 hover:text-white focus:outline-none" type="submit" onClick={()=>setIsOpen(!isOpen)}>
+    <div className="mb-2 rounded-lg shadow-sm bg-white overflow-hidden border border-gray-200">
+      <button className="w-full text-left px-6 py-4 flex justify-between items-center bg-linear-to-r from-gray-50 to-white hover:from-gray-100 transition-colors text-xl font-bold text-gray-800" type="submit" onClick={()=>setIsOpen(!isOpen)}>
         {subject.title}
         <span>{isOpen? '▲' : '▼'}</span>
       </button>
       {isOpen && 
-        <div className="p-4 bg-gray-900">
+        <div className="border-t border-gray-200">
           {subject.items.map((sub, index)=>(
             <SubAccordionItem key={index} sub={sub}/>
           ))}
@@ -304,13 +304,10 @@ const AccordionItem = ({subject}:{subject: typeof lawItems[number]}) => {
   )
 }
 
-const Sidebar = () => {
+const LawMenu = () => {
   return(
-    <div className="w-64 bg-gtay-800 h-screen fixed overflow-y-auto pt-8">
-      <div className="p-4 text-xl font-bold text-white border-b border-gray-700">
-        司法試験学習メニュー
-      </div>
-      <div>
+    <div className="max-w-3xl mx-auto mb-12">
+      <div className="space-y-3">
         {lawItems.map((subject)=>(
           <AccordionItem key={subject.title} subject={subject}/>
         ))}
@@ -319,4 +316,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default LawMenu
