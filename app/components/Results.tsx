@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import { useState } from "react"
 
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 }
 
 const Results = ({results, keyword, isLoading}: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
   
   if(isLoading){
     return(
@@ -36,7 +38,9 @@ const Results = ({results, keyword, isLoading}: Props) => {
 
                 <span className="inline-block px-4 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">カテゴリー: {result.revision_info.category}</span>
 
-                {result.sentences.map((s: any, i: number)=>
+                <button onClick={()=>setIsOpen(!isOpen)} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">詳細</button>
+
+                {isOpen && result.sentences.map((s: any, i: number)=>
                   <div key={i} 
                   className="mt-4 p-5 bg-blue-50 border-l-4 border-blue-700 rounded-r-lg 
               text-gray-800 leading-8 text-base

@@ -11,7 +11,7 @@ export default function LawDetailPage({params}: {params: Promise<{id: string}>})
       <div className="max-w-5xl mx-auto py-12 px-6">
         <div className="mb-8">
           <Link href="/" className="text-blue-600 hover:underline">
-            ←検索結果に戻る
+            ←検索画面に戻る
           </Link>
         </div>
         <LawDetails law_revision_id={id}/>
