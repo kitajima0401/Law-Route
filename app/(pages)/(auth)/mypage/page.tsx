@@ -2,7 +2,12 @@
 import useAuth from "@/app/api/utils/useAuth"
 
 const Mypage = () => {
-  const loginUserEmail = useAuth()
+  const {loginUserEmail, isLoading} = useAuth()
+  if(isLoading){
+    return(
+      <div className="pt-8">認証中...</div>
+    )
+  }
   if(!loginUserEmail){
     return(
       <div className="pt-8">認証中...</div>

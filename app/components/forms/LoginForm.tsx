@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-
 import { loginSchema, LoginSchema } from "@/app/lib/validation/loginSchema"
 
 export default function LoginForm(){
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -17,36 +19,36 @@ export default function LoginForm(){
     resolver: zodResolver(loginSchema)
   })
 
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
-
   const onSubmit = async (data: LoginSchema)=>{
     setIsLoading(true)
+    console.log("Form data submitted:", data); 
     try{
+      console.log("Attempting to fetch API at:", "/api/user/login"); 
       const res = await fetch("/api/user/login",{
         method: "POST",
         headers: {
-          "Accept": "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
       })
 
+      console.log("API response status:", res.status); 
       const jsonData = await res.json()
       console.log("API response body:", jsonData)
 
       if(!res.ok){
+        console.error("API error detected:", jsonData.message); 
         throw new Error(jsonData.message)
       }
-
+      localStorage.removeItem("token")
       localStorage.setItem("token", jsonData.token)
 
       toast.success("ログイン成功")
-      router.push("/mypage")
     }catch(err: any){
       toast.error(err.message)
     }finally{
       setIsLoading(false)
+      router.push("/mypage")
     }
   }
 

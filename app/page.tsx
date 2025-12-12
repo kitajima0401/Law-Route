@@ -3,6 +3,7 @@ import { useState } from "react"
 import Results from "./components/Results"
 import SearchForm from "./components/forms/SearchForm"
 import { toast } from "react-toastify"
+import SidebarLayout from "./components/SidebarLayout"
 
 const Homepage = () => {
   const [keyword, setKeyword] = useState<string>("")
@@ -35,14 +36,16 @@ const Homepage = () => {
   }
 
   return(
-    <div className="min-h-screen bg-gray-50 pt-8">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Law Route</h1>
-        <p className="text-lg text-gray-600 text-center mb-10">キーワードを入力して、法令を検索できます。</p>
-        <SearchForm onSearch={handleSearch} isLoading={isLoading} />
-        <Results results={results?.items ?? []} keyword={keyword} isLoading={isLoading} />
+    <SidebarLayout>
+      <div className="min-h-screen bg-gray-50 pt-8">
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Law Route</h1>
+          <p className="text-lg text-gray-600 text-center mb-10">キーワードを入力して、法令を検索できます。</p>
+          <SearchForm onSearch={handleSearch} isLoading={isLoading} />
+          <Results results={results?.items ?? []} keyword={keyword} isLoading={isLoading} />
+        </div>
       </div>
-    </div>
+    </SidebarLayout>
   )
 }
 

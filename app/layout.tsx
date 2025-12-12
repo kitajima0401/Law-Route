@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import SidebarLayout from "./components/SidebarLayout";
 
 
 export const metadata: Metadata = {
@@ -20,9 +19,7 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <Header/>
-          <SidebarLayout>
             {children}
-          </SidebarLayout>
         <ToastContainer/>
       </body>
     </html>
