@@ -20,6 +20,17 @@ const LawDetails = ({law_revision_id}: Props) => {
   const [LawData, setLawData] = useState<LawResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [openChapters, setOpenChapters] = useState(new Set<string>())
+
+  const toggleChapter = (chapterNum: string)=>{
+    const newSet = new Set(openChapters)
+    if(newSet.has(chapterNum)){
+      newSet.delete(chapterNum)
+    }else{
+      newSet.add(chapterNum)
+    }
+    setOpenChapters(newSet)
+  }
 
   useEffect(()=>{
     const getFullText = async() => {
@@ -57,13 +68,14 @@ const LawDetails = ({law_revision_id}: Props) => {
     if (typeof node === "string") return node
 
     const { tag, attr={}, children=[] } = node
+    const num = attr.Num || ""
 
     switch(tag){
       case "LawTitle":
         return <h1 key={`title-${attr.Num}`} className="text-3xl font-bold text-center my-10">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</h1>;
 
       case "ChapterTitle":
-        return <h2 key={`chapter-title-${attr.Num}`} className="text-2xl font-bold mt-12 mb-6 text-blue-900 border-b-2 border-blue-200 pb-2">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</h2>;
+        return <>{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</>;
 
       case "ArticleTitle":
         return <span key={`article-title-${attr.Num}`} className="text-xl font-bold text-red-900 mr-3">{children.map((child: any, i: number) => <span key={i}>{renderNode(child)}</span>)}</span>;
@@ -80,10 +92,10 @@ const LawDetails = ({law_revision_id}: Props) => {
           </section>
         );
         case "Paragraph":
-          const num = attr.Num && attr.Num !== "1" ? `${attr.Num}`: ""
+          // const paragraphNumDispley = attr.Num && attr.Num !== "1" ? `${attr.Num}`: ""
           return(
             <div key={`paragraph-${attr.Num}`} className="my-4 leading-8 text-lg">
-              {num && <span className="font-medium">{num}</span>}
+              {/* {paragraphNumDispley && <span className="font-medium">{paragraphNumDispley}</span>} 不具合あったら追加  */}
               {children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}
             </div>
           )
@@ -91,6 +103,20 @@ const LawDetails = ({law_revision_id}: Props) => {
         case "Sentence":
           return <span key={`sentence-${attr.Num}`} >{children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}</span>;
         case "Chapter":
+          const isOpen = openChapters.has(num);
+          const titleNode = children.find((c: any)=>c.tag === "ChapterTitle");
+          const contentNodes = children.filter((c: any)=>c.tag !== "ChapterTitle")
+          return(
+            <section key={`chapter-${num}`}>
+              {titleNode && (
+                <h2 onClick={()=>toggleChapter(num)} className="text-2xl font-bold mt-12 mb-6 text-blue-900 border-b-2 border-blue-200 pb-2 cursor-pointer hover:bg-blue-100 p-2 rounded transition-colors">
+                  {isOpen ? '▼ ' : '▶ '}
+                  {titleNode.children.map((child: any, i: number)=><span key={i}>{renderNode(child)}</span>)}
+                </h2>
+              )}
+              {isOpen && <div className="pl-4 border-l-2 border-blue-100">{contentNodes.map((child: any, i: number)=><div key={i}>{renderNode(child)}</div>)}</div>}
+            </section>
+          )
         case "MainProvision":
         case "LawBody":
           return <div key={`law-body-${attr.Num}`} className="space-y-4">{children.map((child: any, i: number)=><div key={i}>{renderNode(child)}</div>)}
