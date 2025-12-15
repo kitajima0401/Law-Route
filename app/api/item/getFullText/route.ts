@@ -11,7 +11,7 @@ export async function POST(request: NextRequest){
       throw new Error(`e-Gov API Error: ${response.status}`)
     }
     const data = await response.json()
-    console.log(data)
+    console.log("法令全文データ: ",data.law_full_text.children)
     return NextResponse.json(data)
   }catch(err: any){
     console.error("APIエラー:", err)

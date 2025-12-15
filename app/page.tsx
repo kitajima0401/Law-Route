@@ -26,6 +26,7 @@ const Homepage = () => {
       if (!res.ok){
         throw new Error(jsonData.message)
       }
+      console.log(jsonData)
       setResults(jsonData.data)
       toast.success("検索成功")
     }catch(err: any){
