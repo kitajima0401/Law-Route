@@ -41,7 +41,7 @@ const LawDetails = ({law_revision_id}: Props) => {
           return
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/getFullText`,{
+        const response = await fetch("/api/item/getFullText",{
           method: "POST",
           body: JSON.stringify({ law_revision_id }),
           headers: { "Content-Type": "application/json" }
