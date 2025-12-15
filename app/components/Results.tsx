@@ -53,7 +53,7 @@ const Results = ({results, keyword, isLoading}: Props) => {
                   <Link className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition" href={`/lawDetailPage/${result.revision_info.law_revision_id}`}>
                     本文を表示
                   </Link>
-                  <Link href={`${process.env.NEXT_PUBLIC_URL}/mypage`} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</Link>
+                  <Link href={"/mypage"} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</Link>
                 </div>
 
               </div>
