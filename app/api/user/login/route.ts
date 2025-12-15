@@ -23,7 +23,7 @@ export async function POST(request: NextRequest){
     const payload = {
       email: reqBody.email
     }
-    const token = await new SignJWT(payload).setProtectedHeader({alg: "HS256"}).setExpirationTime("1d").sign(secretKey)
+    const token = await new SignJWT(payload).setProtectedHeader({alg: "HS256"}).setExpirationTime("7d").sign(secretKey)
     console.log("トークン発行: ",token)
     return NextResponse.json({message: "ログイン成功", token: token})
   }catch(err){
