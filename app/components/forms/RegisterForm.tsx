@@ -6,6 +6,16 @@ import { useRouter } from "next/navigation"
 import { registerSchema, RegisterSchema } from "@/app/lib/validation/registerSchema"
 import { useState } from "react"
 
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Container,
+  Paper,
+  CircularProgress,
+} from "@mui/material";
+
 export default function RegisterForm(){
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -51,22 +61,79 @@ export default function RegisterForm(){
   }
 
   return(
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
-      <div>
-        <input {...register("name")} placeholder="名前" className="border p-2 w-full" disabled={isLoading}/>
-        {errors.name&&<p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-      </div>
-      <div>
-        <input {...register("email")} placeholder="メールアドレス" className="border p-2 w-full" disabled={isLoading}/>
-        {errors.email&&<p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-      </div>
-      <div>
-        <input {...register("password")} placeholder="パスワード" className="border p-2 w-full" disabled={isLoading}/>
-        {errors.password&&<p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-      </div>
-      <button type="submit" disabled={isLoading} className="bg-blue-600 text-white p-2 rounded mt-3 disabled:bg-blue-400">
-        {isLoading?"登録中...":"新規登録"}
-      </button>
-    </form>
+    // <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
+    //   <div>
+    //     <input {...register("name")} placeholder="名前" className="border p-2 w-full" disabled={isLoading}/>
+    //     {errors.name&&<p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+    //   </div>
+    //   <div>
+    //     <input {...register("email")} placeholder="メールアドレス" className="border p-2 w-full" disabled={isLoading}/>
+    //     {errors.email&&<p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+    //   </div>
+    //   <div>
+    //     <input {...register("password")} placeholder="パスワード" className="border p-2 w-full" disabled={isLoading}/>
+    //     {errors.password&&<p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+    //   </div>
+    //   <button type="submit" disabled={isLoading} className="bg-blue-600 text-white p-2 rounded mt-3 disabled:bg-blue-400">
+    //     {isLoading?"登録中...":"新規登録"}
+    //   </button>
+    // </form>
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Paper elevation={3} sx={{ p: 4 }}>
+        <Typography variant="h5" component="h1" gutterBottom align="center">
+          新規登録
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 3 }}
+        >
+          {/* 名前 */}
+          <TextField
+            label="名前"
+            {...register("name")}
+            error={!!errors.name}
+            helperText={errors.name?.message as string}
+            disabled={isLoading}
+            fullWidth
+          />
+
+          {/* メールアドレス */}
+          <TextField
+            label="メールアドレス"
+            type="email"
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email?.message as string}
+            disabled={isLoading}
+            fullWidth
+          />
+
+          {/* パスワード */}
+          <TextField
+            label="パスワード"
+            type="password"
+            {...register("password")}
+            error={!!errors.password}
+            helperText={errors.password?.message as string}
+            disabled={isLoading}
+            fullWidth
+          />
+
+          {/* 送信ボタン */}
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            disabled={isLoading}
+            startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : null}
+            sx={{ mt: 2 }}
+          >
+            {isLoading ? "登録中..." : "新規登録"}
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   )
 }

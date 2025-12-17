@@ -7,6 +7,16 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { loginSchema, LoginSchema } from "@/app/lib/validation/loginSchema"
 
+import {
+  Box,
+  Button,
+  TextField,
+  CircularProgress,
+  Typography,
+  Container,
+  Paper,
+} from "@mui/material"
+
 export default function LoginForm(){
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -53,18 +63,61 @@ export default function LoginForm(){
   }
 
   return(
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-      <input {...register("email")} placeholder="email" className="border p-2 " disabled={isLoading}/>
-      {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+    // <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+    //   <input {...register("email")} placeholder="email" className="border p-2 " disabled={isLoading}/>
+    //   {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
-      <input {...register("password")} type="password" placeholder="password" className="border p-2" disabled={isLoading}/>
-      {errors.password && (
-        <p className="text-red-500">{errors.password.message}</p>
-      )}
+    //   <input {...register("password")} type="password" placeholder="password" className="border p-2" disabled={isLoading}/>
+    //   {errors.password && (
+    //     <p className="text-red-500">{errors.password.message}</p>
+    //   )}
 
-      <button type="submit" className="bg-blue-600 text-white p-2 rounded mt-3" disabled={isLoading}>
-        {isLoading?"ログイン中...":"ログイン"}
-      </button>
-  </form>
+    //   <button type="submit" className="bg-blue-600 text-white p-2 rounded mt-3" disabled={isLoading}>
+    //     {isLoading?"ログイン中...":"ログイン"}
+    //   </button>
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Paper elevation={3} sx={{ p: 4 }}>
+        <Typography variant="h5" component="h1" gutterBottom align="center">
+          ログイン
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 2 }}
+        >
+          <TextField
+            label="メールアドレス"
+            type="email"
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email?.message as string}  // ← ここで型対策
+            disabled={isLoading}
+            fullWidth
+          />
+
+          <TextField
+            label="パスワード"
+            type="password"
+            {...register("password")}
+            error={!!errors.password}
+            helperText={errors.password?.message as string}  // ← ここで型対策
+            disabled={isLoading}
+            fullWidth
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            disabled={isLoading}
+            startIcon={isLoading ? <CircularProgress size={20} /> : null}
+          >
+            {isLoading ? "ログイン中..." : "ログイン"}
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
+      
   )
 }
