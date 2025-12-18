@@ -34,7 +34,7 @@ const RegisterForm = () => {
     <Container maxWidth="sm" sx={{mt: 8, minHeight: "100vh"}}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{display: "flex", flexDirection: "column", gap: 3}}>
         <Typography variant="h4" component="h1" align="center" gutterBottom fontWeight="bold">新規登録</Typography>
-        <TextField variant="outlined" {...register("name")} label="ユーザーネーム" error={!!errors.name} helperText={errors.name?.message} />
+        <TextField variant="outlined" {...register("name")} label="ユーザーネーム" error={!!errors.name} helperText={errors.name?.message} disabled={isSubmitting} />
         <TextField variant="outlined" {...register("email")} label="メールアドレス" error={!!errors.email} helperText={errors.email?.message} />
         <TextField variant="outlined" {...register("password")} label="パスワード" error={!!errors.password} helperText={errors.password?.message} />
         <Button variant="contained" type="submit">

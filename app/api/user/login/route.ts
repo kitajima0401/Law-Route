@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 export async function POST(request: NextRequest){
   const reqBody = await request.json()
   if (!reqBody.email || !reqBody.password) {
-    return NextResponse.json({ message: "メールアドレスとパスワードを入力してください" }, { status: 400 });
+    return NextResponse.json({ message: "メールアドレスとパスワードを入力してください" });
   }
   try{
     await connectDB()
@@ -28,7 +28,6 @@ export async function POST(request: NextRequest){
       email: savedUserdata.email
     }
     const token = await new SignJWT(payload).setProtectedHeader({alg: "HS256"}).setExpirationTime("7d").sign(secretKey)
-    console.log("トークン発行: ",token)
     return NextResponse.json({message: "ログイン成功", token: token})
   }catch(err){
     console.error("ログインapiでエラー", err)
