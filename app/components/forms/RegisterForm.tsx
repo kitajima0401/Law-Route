@@ -2,31 +2,14 @@
 import { registerSchema, RegisterSchema } from "@/app/lib/validation/registerSchema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { toast } from "react-toastify"
-import { useRouter } from "next/navigation"
-import { useMutation } from "@tanstack/react-query"
-import api from "@/app/lib/axios"
+import { useRegister } from "@/app/hooks/useRegister"
 
 import { TextField, Button, Container, Box, Typography } from "@mui/material"
 
 const RegisterForm = () => {
-  const router = useRouter()
-  const { register, handleSubmit, formState: {errors, isSubmitting} } = useForm<RegisterSchema>({ resolver: zodResolver(registerSchema)})
+  const { register, handleSubmit, formState: {errors} } = useForm<RegisterSchema>({ resolver: zodResolver(registerSchema)})
 
-  const registerMutation = useMutation({
-    mutationFn:(data: RegisterSchema)=>{
-      return api.post("/api/user/register", data)
-    },
-    onSuccess:(res)=>{
-      toast.success(res.data.message)
-      router.push("/login")
-    },
-    onError:(error: any)=>{
-      const message = error.response?.data?.message 
-      toast.error(message)
-    }
-  })
-
+  const registerMutation = useRegister()
   const onSubmit = (data: RegisterSchema) => {
     registerMutation.mutate(data)
   }

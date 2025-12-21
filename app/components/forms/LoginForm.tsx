@@ -1,32 +1,16 @@
 "use client"
 import { loginSchema, LoginSchema } from "@/app/lib/validation/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
-import { toast } from "react-toastify"
-import { useMutation } from "@tanstack/react-query"
-import api from "@/app/lib/axios"
+import { useLogin } from "@/app/hooks/useLogin"
 
 import { Container, Box, TextField, Button, Typography } from "@mui/material"
 
 
 const LoginForm = () => {
-  const router = useRouter()
   const { register, handleSubmit, formState: {errors}} = useForm<LoginSchema>({resolver: zodResolver(loginSchema)})
 
-  const loginMutation = useMutation({
-    mutationFn:(data: LoginSchema)=>{
-      return api.post("/api/user/login", data)
-    },
-    onSuccess:(res)=>{
-      localStorage.setItem("token", res.data.token)
-      toast.success(res.data.message)
-      router.push("/mypage")
-    },
-    onError:(error: any)=>{
-      toast.error(error.response?.data?.message)
-    }
-  })
+  const loginMutation = useLogin()
 
   const onSubmit = (data: LoginSchema) => {
     loginMutation.mutate(data)
