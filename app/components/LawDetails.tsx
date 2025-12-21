@@ -1,4 +1,5 @@
 "use client"
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react"
 
 type Props = {
@@ -126,27 +127,27 @@ const LawDetails = ({law_revision_id}: Props) => {
     }
   }
   return(
-    <article className="max-w-5xl mx-auto p-6 bg-white min-h-screen">
-      <header className="text-center mb-12">
-        <h1 className="text-4xl font-black text-gray-900">
+    <Box component="article" className="max-w-5xl mx-auto p-6 bg-white min-h-screen">
+      <Box component="header" className="text-center mb-12">
+        <Typography component="h1" className="text-4xl font-black text-gray-900">
           {LawData.revision_info.law_title}
-        </h1>
+        </Typography>
         {LawData.revision_info.abbrev && (
-          <p className="text-xl text-gray-600 mt-3">（{LawData.revision_info.abbrev}）</p>
+          <Typography component="p" className="text-xl text-gray-600 mt-3">（{LawData.revision_info.abbrev}）</Typography>
         )}
         {LawData.revision_info.amendment_law_title && (
-          <p className="text-sm text-gray-500 mt-4">
+          <Typography component="p" className="text-sm text-gray-500 mt-4">
             改正：{LawData.revision_info.amendment_law_title}
             （{LawData.revision_info.amendment_enforcement_date}施行）
-          </p>
+          </Typography>
         )}
-      </header>
-      <div className="prose prose-lg max-w-none">
+      </Box>
+      <Box component="div" className="prose prose-lg max-w-none">
         {LawData.law_full_text.children.map((child: any, i: number)=>(
-          <div key={i}>{renderNode(child)}</div>
+          <Box component="div" key={i}>{renderNode(child)}</Box>
         ))}
-      </div>
-    </article>
+      </Box>
+    </Box>
   )
 }
 

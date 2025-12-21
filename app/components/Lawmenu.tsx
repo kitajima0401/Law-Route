@@ -5,10 +5,7 @@ import { Container,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Paper,
-  Divider,
-  Box, } from "@mui/material"
+  ListItemText, } from "@mui/material"
   import { ChevronRight } from "@mui/icons-material"
 
 const LawMenu = () => {
@@ -23,59 +20,21 @@ const LawMenu = () => {
     {title: "刑事訴訟法", law_revision_id:"323AC0000000131_20250722_507AC0000000026"},
   ]
   return(
-    <Container maxWidth="md" sx={{ py: 8 }}>
-      <Typography
-        variant="h6"
-        component="h1"
-        align="center"
-        fontWeight="bold"
-        gutterBottom
-        sx={{
-          m: 1,
-          color: "text.primary",
-          pb: 2,
-          display: "inline-block",
-          mx: "auto",
-        }}
-      >
-        法令一覧
-      </Typography>
+    <Container>
+      <Typography>
 
-      <Paper elevation={4} sx={{ borderRadius: 3, overflow: "hidden" }}>
-        <List disablePadding>
-          {LawMap.map((law, idx) => (
-            <Box key={idx}>
-              <ListItem disablePadding>
-                <ListItemButton
-                  onClick={() => router.push(`/lawDetailPage/${law.law_revision_id}`)}
-                  sx={{
-                    py: 1,
-                    px: 4,
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      backgroundColor: "#eff6ff",  // 淡い青ホバー
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      <Typography variant="h6" fontWeight="medium">
-                        {law.title}
-                      </Typography>
-                    }
-                  />
-                  <ChevronRight color="action" />
-                </ListItemButton>
-              </ListItem>
-              {idx < LawMap.length - 1 && <Divider />}
-            </Box>
-          ))}
-        </List>
-      </Paper>
-
-      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 6 }}>
-        クリックで各法令の詳細ページへ移動します
       </Typography>
+      <List>
+        {LawMap.map((law, idx)=>(
+          <div key={idx}>
+            <ListItem disablePadding>
+              <ListItemButton onClick={()=>router.push(`/lawDetailPage/${law.law_revision_id}`)}>
+                <ListItemText primary={law.title}/> 
+              </ListItemButton>
+            </ListItem>
+          </div>
+        ))}
+      </List>
     </Container>
   )
 }

@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter"
 import { Roboto } from 'next/font/google';
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
+
+const queryClient = new QueryClient()
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +28,11 @@ export default function RootLayout({
     <html lang="ja">
       <body className={roboto.className}>
         <AppRouterCacheProvider>
-          <Header/>
+          <QueryClientProvider client={queryClient}>
+            <Header/>
               {children}
-          <ToastContainer/>
+            <ToastContainer/>
+          </QueryClientProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

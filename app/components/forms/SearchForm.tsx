@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SearchSchema, searchSchema } from "@/app/lib/validation/searchSchema"
+import { Box, Typography, Container, Button, TextField } from "@mui/material"
 
 interface FormProps {
   onSearch: (keyword: string) => Promise<void>,
@@ -23,14 +24,43 @@ export default function SearchForm({onSearch, isLoading}: FormProps){
   }
 
   return(
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
-      <div>
-        <input {...register("keyword")} placeholder="キーワードを入力してください" className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-700"  disabled={isLoading}/>
-        {errors.keyword&&<p className="text-red-500 text-sm mt-1">{errors.keyword.message}</p>}
-      </div>
-      <button type="submit" disabled={isLoading} className="px-10 py-4 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 active:bg-blue-900 transition shadow-md whitespace-nowrap">
-        {isLoading?"検索中...":"検索"}
-      </button>
-    </form>
+    <Container maxWidth="sm">
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)} 
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap:3,
+          mt:4,
+        }}
+      >
+        <TextField 
+          {...register("keyword")} 
+          placeholder="キーワードを入力してください"   
+          disabled={isLoading}
+          variant="outlined"
+          fullWidth
+          error={!!errors.keyword}
+          helperText={errors.keyword?.message}
+          sx={{bgcolor: 'background.paper'}}
+        />
+        <Button 
+          type="submit" 
+          variant="contained"
+          color="primary"
+          size="large"
+          disabled={isLoading}
+          sx={{
+            py: 1.5,
+            fontWeight: "medium",
+            boxShadow: 3,
+            "&:hover":{boxShadow:6}
+          }}
+        >
+          {isLoading?"検索中...":"検索"}
+        </Button>
+      </Box>
+    </Container>
   )
 }
