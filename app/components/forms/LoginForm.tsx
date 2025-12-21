@@ -12,7 +12,7 @@ import { Container, Box, TextField, Button, Typography } from "@mui/material"
 
 const LoginForm = () => {
   const router = useRouter()
-  const { register, handleSubmit, formState: {errors, isSubmitting}} = useForm<LoginSchema>({resolver: zodResolver(loginSchema)})
+  const { register, handleSubmit, formState: {errors}} = useForm<LoginSchema>({resolver: zodResolver(loginSchema)})
 
   const loginMutation = useMutation({
     mutationFn:(data: LoginSchema)=>{
@@ -36,10 +36,13 @@ const LoginForm = () => {
     <Container maxWidth="sm" sx={{mt: 8, minHeight: "100vh"}}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{display: "flex", flexDirection: "column", gap: 3}}  >
         <Typography variant="h4" component="h1" align="center" gutterBottom fontWeight="bold">ログイン</Typography>
-        <TextField variant="outlined" label="メールアドレス" error={!!errors.email} {...register("email")} helperText={errors.email?.message} disabled={isSubmitting} />
-        <TextField variant="outlined" label="パスワード" error={!!errors.email} {...register("password")} helperText={errors.password?.message} disabled={isSubmitting} />
-        <Button variant="contained" type="submit" disabled={isSubmitting}>
-          {isSubmitting? "ログイン中...": "ログイン"}
+
+        <TextField variant="outlined" label="メールアドレス" error={!!errors.email} {...register("email")} helperText={errors.email?.message} disabled={loginMutation.isPending} />
+
+        <TextField variant="outlined" label="パスワード" error={!!errors.email} {...register("password")} helperText={errors.password?.message} disabled={loginMutation.isPending} />
+
+        <Button variant="contained" type="submit" disabled={loginMutation.isPending}>
+          {loginMutation.isPending? "ログイン中...": "ログイン"}
         </Button>
       </Box>
     </Container>
