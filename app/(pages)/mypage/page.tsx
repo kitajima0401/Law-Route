@@ -1,5 +1,6 @@
 "use client"
 import useAuth from "@/app/api/utils/useAuth"
+import { Container, Box, Typography, List, ListItem } from "@mui/material"
 
 const Mypage = () => {
   const {loginUserEmail, isLoading} = useAuth()
@@ -14,14 +15,19 @@ const Mypage = () => {
     )
   }
   return(
-    <div>
-      <div>
-        <div className="p-8">
-          <h1>マイページ</h1>
-          <h2>ようこそ、 {loginUserEmail} さん</h2>
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="sm" sx={{py: 8}}>
+      <Box mt={4} textAlign="center">
+        <Typography variant="h4" fontWeight="bold" textAlign="center" mb={4} color="primary.main">
+          ようこそ、 {loginUserEmail} さん
+        </Typography>
+        <List>
+          <ListItem sx={{ position: 'relative', bgcolor: 'background.paper', borderRadius: 2, mb: 1 }}>
+            
+          </ListItem>
+        </List>
+      </Box>
+    </Container>
+    
   )
 }
 

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { jwtVerify } from "jose";
+import { toast } from "react-toastify";
 
 const useAuth = () => {
   const [loginUserEmail, setLoginUserEmail] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
+  const pathName = usePathname()
 
   useEffect(()=>{
     const checkToken = async() => {
@@ -16,8 +18,12 @@ const useAuth = () => {
       console.log("tokenの長さ:", token?.length)
       console.log("ドットの数（パート数）:", token?.split('.').length)
 
+
       if(!token){
-        router.push("/login")
+        if(pathName !== "/"){
+          router.push("/login")
+          toast.success("ログインして、マイページを作成しましょう")
+        }
         setIsLoading(false)
         return
       }
@@ -32,17 +38,27 @@ const useAuth = () => {
         setIsLoading(false)
       }catch(error){
         console.log("JWT verification failed:", error)
-        router.push("/login")
+        if(pathName !== "/"){
+          router.push("/login")
+          // toast.success("ログインして、マイページを作成しましょう")
+        }
         setIsLoading(false)
       }
 
     }
 
     checkToken()
-  },[router])
+  },[pathName, router])
+
+  const logout = () =>{
+    localStorage.removeItem("token");
+    setLoginUserEmail("")
+    setIsLoading(false)
+    router.push("/")
+  }
 
 
-  return {loginUserEmail, isLoading}
+  return {loginUserEmail, isLoading, logout}
 }
 
 export default useAuth
