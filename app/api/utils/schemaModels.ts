@@ -2,16 +2,6 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
-const ItemSchema = new Schema({
-  law_id: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  }
-})
 
 const UserSchema = new Schema({
   name: {
@@ -26,8 +16,19 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  favorites:[
+    {
+      law_revision_id: {
+        type: String,
+        required: true,
+      },
+      addedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ]
 })
 
-export const ItemModel = mongoose.models.Item || mongoose.model("Item", ItemSchema)
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)

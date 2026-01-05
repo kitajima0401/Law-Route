@@ -1,5 +1,5 @@
 "use client"
-import { loginSchema, LoginSchema } from "@/app/lib/validation/loginSchema"
+import { loginSchema, LoginSchema } from "@/lib/validation/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useLogin } from "@/app/hooks/useLogin"

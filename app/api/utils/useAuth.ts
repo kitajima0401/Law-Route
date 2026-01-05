@@ -20,7 +20,7 @@ const useAuth = () => {
 
 
       if(!token){
-        if(pathName !== "/"){
+        if(pathName === "/mypage"){
           router.push("/login")
           toast.success("ログインして、マイページを作成しましょう")
         }
@@ -38,7 +38,7 @@ const useAuth = () => {
         setIsLoading(false)
       }catch(error){
         console.log("JWT verification failed:", error)
-        if(pathName !== "/"){
+        if(pathName === "/mypage"){
           router.push("/login")
           // toast.success("ログインして、マイページを作成しましょう")
         }

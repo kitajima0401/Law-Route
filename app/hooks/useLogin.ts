@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from "@tanstack/react-query"
-import { LoginSchema } from '../lib/validation/loginSchema';
-import api from "@/app/lib/axios"
+import { LoginSchema } from '../../lib/validation/loginSchema';
+import api from "@/lib/axios"
 import { toast } from 'react-toastify';
 
 

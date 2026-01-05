@@ -1,69 +1,109 @@
-"use client"
-import Link from "next/link"
-import { useState } from "react"
+"use client";
 
+import Link from "next/link";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  Button,
+  CircularProgress,
+  Collapse,
+  Stack,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 type Props = {
-  results: any[] | null,
-  keyword: string
-  isLoading: boolean
-}
+  results: any[] | null;
+  keyword: string;
+  isLoading: boolean;
+};
 
-const Results = ({results, keyword, isLoading}: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-  
-  if(isLoading){
-    return(
-      <div>検索中...</div>
-    )
+const Results = ({ results, keyword, isLoading }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" p={4}>
+        <CircularProgress />
+        <Typography ml={2}>検索中...</Typography>
+      </Box>
+    );
   }
 
-  if(!results || results.length === 0){
-    return null
+  if (!results || results.length === 0) {
+    return null;
   }
 
-  
+  return (
+    <Box sx={{ py: 4 }}>
+      <Typography variant="h5" gutterBottom>
+        「{keyword}」の検索結果
+      </Typography>
 
-  return(
-    <>
-      <div>
-        <h2>{keyword}の検索結果</h2>
-        <div>
-          {results.map(result=>
-              <div key={result.law_info.law_id} className="bg-white border border-gray-200 rounded-lg shadow-sm p-8 hover:shadow-md transition-shadow">
+      <Stack spacing={3}>
+        {results.map((result) => (
+          <Card key={result.law_info.law_id} variant="outlined" sx={{ p: 2 }}>
+            <CardContent>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                法令番号: {result.law_info.law_num}
+              </Typography>
 
-                <p className="text-gray-600 font-medium mb-6">法令番号: {result.law_info.law_num}</p>
+              <Typography variant="h6" component="div" gutterBottom>
+                {result.revision_info.law_title}
+              </Typography>
 
-                <div>{result.revision_info.law_title}</div>
+              <Chip
+                label={`カテゴリー: ${result.revision_info.category}`}
+                color="primary"
+                size="small"
+                sx={{ mb: 2 }}
+              />
 
-                <span className="inline-block px-4 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">カテゴリー: {result.revision_info.category}</span>
+              <Button
+                startIcon={isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                onClick={() => setIsOpen(!isOpen)}
+                variant="outlined"
+                size="small"
+                sx={{ mb: 2 }}
+              >
+                詳細
+              </Button>
 
-                <button onClick={()=>setIsOpen(!isOpen)} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">詳細</button>
+              <Collapse in={isOpen}>
+                <Box sx={{ pl: 2, py: 2, bgcolor: "primary.50", borderLeft: 4, borderColor: "primary.main" }}>
+                  {result.sentences.map((s: any, i: number) => (
+                    <Typography
+                      key={i}
+                      variant="body1"
+                      sx={{ mb: 2, "&:last-child": { mb: 0 } }}
+                      dangerouslySetInnerHTML={{ __html: s.text }}
+                    />
+                  ))}
+                </Box>
+              </Collapse>
 
-                {isOpen && result.sentences.map((s: any, i: number)=>
-                  <div key={i} 
-                  className="mt-4 p-5 bg-blue-50 border-l-4 border-blue-700 rounded-r-lg 
-              text-gray-800 leading-8 text-base
-                wrap-break-word overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: s.text }}
-                  />
-                )}
+              <Stack direction="row" spacing={2} justifyContent="flex-end" mt={3}>
+                <Button
+                  component={Link}
+                  href={`/lawDetailPage/${result.revision_info.law_revision_id}`}
+                  variant="outlined"
+                >
+                  本文を表示
+                </Button>
+                <Button component={Link} href="/mypage" variant="outlined">
+                  お気に入り登録
+                </Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        ))}
+      </Stack>
+    </Box>
+  );
+};
 
-                <div className="mt-8 text-right">
-                  <Link className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition" href={`/lawDetailPage/${result.revision_info.law_revision_id}`}>
-                    本文を表示
-                  </Link>
-                  <Link href={"/mypage"} className="px-6 py-2 border border-blue-700 text-blue-700 font-medium rounded hover:bg-blue-50 transition">お気に入り登録</Link>
-                </div>
-
-              </div>
-            )
-          }
-        </div>
-      </div>
-    </>
-  )
-}
-  
-
-export default Results
+export default Results;

@@ -1,7 +1,7 @@
 "use client"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SearchSchema, searchSchema } from "@/app/lib/validation/searchSchema"
+import { SearchSchema, searchSchema } from "@/lib/validation/searchSchema"
 import { Box, Typography, Container, Button, TextField } from "@mui/material"
 
 interface FormProps {

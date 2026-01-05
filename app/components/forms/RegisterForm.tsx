@@ -1,5 +1,5 @@
 "use client"
-import { registerSchema, RegisterSchema } from "@/app/lib/validation/registerSchema"
+import { registerSchema, RegisterSchema } from "@/lib/validation/registerSchema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRegister } from "@/app/hooks/useRegister"
