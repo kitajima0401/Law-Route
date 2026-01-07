@@ -12,9 +12,28 @@ services:
     build:
       context: .
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
+      MONGODB_URI: mongodb://mongo:27017/law-route-db
     ports:
       - 3000:3000
+    depends_on:
+      - mongo
+    volumes:                                
+      - .:/usr/src/app                      
+      - /usr/src/app/node_modules           
+      - /usr/src/app/.next                  
+    command: npm run dev 
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
