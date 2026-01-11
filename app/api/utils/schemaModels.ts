@@ -21,7 +21,6 @@ const UserSchema = new Schema({
     {
       law_revision_id: {
         type: String,
-        required: true,
       },
       addedAt: {
         type: Date,
