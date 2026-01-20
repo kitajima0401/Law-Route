@@ -22,7 +22,9 @@ const Mypage = () => {
         </Typography>
         <List>
           <ListItem sx={{ position: 'relative', bgcolor: 'background.paper', borderRadius: 2, mb: 1 }}>
-            
+            {/* お気に入り登録した法令IDをfetchしたい
+            schemaにrevision_idを入れたい。 */}
+            あなたの登録した法令：
           </ListItem>
         </List>
       </Box>
