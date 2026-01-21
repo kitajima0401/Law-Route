@@ -38,7 +38,7 @@ const Homepage = () => {
 
   return(
     <Box sx={{minHeight:"100vh", bgcolor:"gray.50"}}>
-      <Container maxWidth="lg" sx={{py:{xs:6, md:12}}}>
+      <Container maxWidth="lg" sx={{py:{xs:9, md:12}}}>
         <Typography variant="h3" fontWeight="bold" align="center" color="text.primary" gutterBottom>
           Law Route
         </Typography>
