@@ -8,7 +8,7 @@ import { Container,
   ListItemText, } from "@mui/material"
   import { ChevronRight } from "@mui/icons-material"
 
-const LawMenu = () => {
+export const LawMenu = () => {
   const router = useRouter()
   const LawMap = [
     {title: "民法", law_revision_id:"129AC0000000089_20251001_505AC0000000053"},
@@ -39,7 +39,6 @@ const LawMenu = () => {
   )
 }
 
-export default LawMenu
 
 // className=" w-full text-left p-6 bg-white rounded-lg shadow-md 
 //                 border border-gray-200 

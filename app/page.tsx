@@ -3,7 +3,7 @@ import { useState } from "react"
 import Results from "./components/Results"
 import SearchForm from "./components/forms/SearchForm"
 import { toast } from "react-toastify"
-import LawMenu from "./components/Lawmenu"
+import {LawMenu} from "@/app/components/Lawmenu"
 import { Box, Container, Typography } from "@mui/material"
 
 const Homepage = () => {
