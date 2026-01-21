@@ -1,11 +1,14 @@
 "use client"
 import { useRouter } from "next/navigation"
-import { Container,
+import { 
+  Container,
   Typography,
   List,
   ListItem,
   ListItemButton,
-  ListItemText, } from "@mui/material"
+  ListItemText,
+  Card,
+  Box } from "@mui/material"
   import { ChevronRight } from "@mui/icons-material"
 
 export const LawMenu = () => {
@@ -20,7 +23,70 @@ export const LawMenu = () => {
     {title: "刑事訴訟法", law_revision_id:"323AC0000000131_20250722_507AC0000000026"},
   ]
   return(
-    <Container>
+    <Container maxWidth="sm" sx={{ mt: 6 }}>
+      <Typography
+        variant="h5"
+        fontWeight={600}
+        sx={{ mb: 2, letterSpacing: 0.5 }}
+      >
+        法令一覧
+      </Typography>
+
+      <Card
+        elevation={0}
+        sx={{
+          borderRadius: 3,
+          border: "1px solid",
+          borderColor: "grey.200",
+          backgroundColor: "#fff",
+        }}
+      >
+        <List disablePadding>
+          {LawMap.map((law) => (
+            <ListItem key={law.law_revision_id} disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  router.push(`/lawDetailPage/${law.law_revision_id}`)
+                }
+                sx={{
+                  px: 3,
+                  py: 2,
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    backgroundColor: "grey.50",
+                  },
+                  "&:hover .chevron": {
+                    transform: "translateX(4px)",
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={
+                    <Typography fontSize={16} fontWeight={500}>
+                      {law.title}
+                    </Typography>
+                  }
+                />
+                <Box
+                  className="chevron"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "grey.400",
+                    transition: "transform 0.2s ease",
+                  }}
+                >
+                  <ChevronRight />
+                </Box>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Card>
+    </Container>
+  )
+}
+{/* <Container>
       <Typography>
 
       </Typography>
@@ -35,10 +101,7 @@ export const LawMenu = () => {
           </div>
         ))}
       </List>
-    </Container>
-  )
-}
-
+    </Container> */}
 
 // className=" w-full text-left p-6 bg-white rounded-lg shadow-md 
 //                 border border-gray-200 
