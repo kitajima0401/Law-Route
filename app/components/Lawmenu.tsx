@@ -314,14 +314,7 @@ export const LawMenu = () => {
                         <ListItem key={topic} disablePadding>
                           <ListItemButton
                             onClick={() => {
-                              // 必要ならここで画面遷移など
-                              // router.push(
-                              //   `/law?subject=${encodeURIComponent(
-                              //     law.title
-                              //   )}&part=${encodeURIComponent(
-                              //     item.subTitle
-                              //   )}&topic=${encodeURIComponent(topic)}`
-                              // )
+                              // 画面遷移など
                             }}
                           >
                             <ListItemText primary={topic} />
