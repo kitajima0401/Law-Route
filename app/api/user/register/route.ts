@@ -8,7 +8,7 @@ export async function POST(request: NextRequest){
   try{
     await connectDB()
   }catch{
-    return NextResponse.json({massege: "データベース接続失敗"})
+    return NextResponse.json({message: "データベース接続失敗"})
   }
   try{
     const savedUserEmail = await UserModel.findOne({email: reqBody.email})

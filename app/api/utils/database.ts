@@ -8,7 +8,7 @@ const connectDB = async() => {
     await mongoose.connect(MONGODB_URI)
     console.log("Success: Connected to mongoDB")
   }catch(err){
-    console.log("Faulure: Unconnected to mongoDB")
+    console.log("Failure: Unconnected to mongoDB")
     throw new Error()
   }
   

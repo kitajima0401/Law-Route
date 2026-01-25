@@ -14,6 +14,7 @@ export const useLogin = () =>{
     },
     onSuccess:(res)=>{
       localStorage.setItem("token", res.data.token)
+      console.log(res.data.token)
       toast.success(res.data.message)
       router.push("/mypage")
     },
