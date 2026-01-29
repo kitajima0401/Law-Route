@@ -61,6 +61,7 @@ const LawDetails = ({ law_revision_id }: Props) => {
 
         if (!response.ok) throw new Error("サーバーエラー");
         const data = await response.json();
+        console.log(data)
         setLawData(data);
         setLoading(false);
       } catch (err) {
@@ -240,3 +241,64 @@ const LawDetails = ({ law_revision_id }: Props) => {
 };
 
 export default LawDetails;
+//jsonの形式メモ
+// {
+//   "law_info": { ... },              // 法令のメタ情報（ID、番号、公布日など）
+//   "revision_info": { ... },         // 改正版情報（改正日、施行日など）
+//   "attached_files_info": { ... },   // 付属画像・ファイル情報（図表など）
+//   "law_full_text": {                // ← これが本文の核心（あなたのコードで使っている部分）
+//     "tag": "Law",
+//     "attr": {                       // 属性（時代、言語、法令種別など）
+//       "Era": "Heisei",
+//       "Year": "11",
+//       "Num": "127",
+//       ...
+//     },
+//     "children": [                   // 子要素の配列（ここが木構造）
+//       {
+//         "tag": "LawNum",            // 法令番号ブロック
+//         "children": ["平成十一年法律第百二十七号"]
+//       },
+//       {
+//         "tag": "LawBody",           // 本文本体
+//         "children": [
+//           {
+//             "tag": "LawTitle",      // 法令名
+//             "children": ["国旗及び国歌に関する法律"]
+//           },
+//           {
+//             "tag": "MainProvision", // 本則（主な条文部分）
+//             "children": [
+//               {
+//                 "tag": "Article",   // 条文
+//                 "attr": { "Num": "1" },
+//                 "children": [
+//                   {
+//                     "tag": "ArticleCaption",  // 条見出し（例: （国旗））
+//                     "children": ["（国旗）"]
+//                   },
+//                   {
+//                     "tag": "ArticleTitle",    // 条タイトル（稀に省略）
+//                     "children": ["第一条"]
+//                   },
+//                   {
+//                     "tag": "Paragraph",       // 款（段落）
+//                     "attr": { "Num": "1" },
+//                     "children": [
+//                       {
+//                         "tag": "Sentence",    // 文（実際の文章）
+//                         "children": ["日本国国旗は、日章とする。"]
+//                       }
+//                     ]
+//                   }
+//                 ]
+//               },
+//               // 第2条、第3条… がここに続く
+//             ]
+//           },
+//           // 附則（SupplProvision）などが続く場合あり
+//         ]
+//       }
+//     ]
+//   }
+// }

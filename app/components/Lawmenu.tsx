@@ -16,14 +16,7 @@ import {
 import { ChevronRight } from "@mui/icons-material"
 
 
-    // {title: "民法", law_revision_id:"129AC0000000089_20251001_505AC0000000053"},
-    // {title: "刑法", law_revision_id:"140AC0000000045_20250722_507AC0000000026"},
-    // {title: "憲法", law_revision_id:"321CONSTITUTION_19470503_000000000000000"},
-    // {title: "商法", law_revision_id:"132AC0000000048_20230401_503AC0000000061"},
-    // {title: "会社法", law_revision_id: "417AC0000000086_20251001_505AC0000000053"},
-    // {title: "民事訴訟法", law_revision_id:"408AC0000000109_20250722_507AC0000000026"},
-    // {title: "刑事訴訟法", law_revision_id:"323AC0000000131_20250722_507AC0000000026"},
-
+    
 
 
     export type Topic = {
@@ -429,31 +422,31 @@ import { ChevronRight } from "@mui/icons-material"
               },
             ],
           },
-    
-          {
-            subTitle: "手形法・小切手法",
-            topics: [
-              {
-                title: "手形の種類・振出・裏書",
-                articles: [{ start: "T1", end: "T20" }],
-              },
-              {
-                title: "手形の支払・遡求権",
-                articles: [{ start: "T40", end: "T52" }],
-              },
-              {
-                title: "小切手の特則・偽造・変造",
-                articles: [{ start: "C1", end: "C50" }],
-              },
-              {
-                title: "手形・小切手の時効",
-                articles: [
-                  { start: "T70", end: "T71" },
-                  { start: "C51", end: "C52" },
-                ],
-              },
-            ],
-          },
+          // 手形小切手法廃止とのことなので、次の司法試験に出題されたら調整して掲載
+          // {
+          //   subTitle: "手形法・小切手法",
+          //   topics: [
+          //     {
+          //       title: "手形の種類・振出・裏書",
+          //       articles: [{ start: "T1", end: "T20" }],
+          //     },
+          //     {
+          //       title: "手形の支払・遡求権",
+          //       articles: [{ start: "T40", end: "T52" }],
+          //     },
+          //     {
+          //       title: "小切手の特則・偽造・変造",
+          //       articles: [{ start: "C1", end: "C50" }],
+          //     },
+          //     {
+          //       title: "手形・小切手の時効",
+          //       articles: [
+          //         { start: "T70", end: "T71" },
+          //         { start: "C51", end: "C52" },
+          //       ],
+          //     },
+          //   ],
+          // },
         ],
       },
       {
@@ -801,4 +794,10 @@ export const LawMenu = () => {
   )
 }
   
-   
+   // {title: "民法", law_revision_id:"129AC0000000089_20251001_505AC0000000053"},
+    // {title: "刑法", law_revision_id:"140AC0000000045_20250722_507AC0000000026"},
+    // {title: "憲法", law_revision_id:"321CONSTITUTION_19470503_000000000000000"},
+    // {title: "商法", law_revision_id:"132AC0000000048_20230401_503AC0000000061"},
+    // {title: "会社法", law_revision_id: "417AC0000000086_20251001_505AC0000000053"},
+    // {title: "民事訴訟法", law_revision_id:"408AC0000000109_20250722_507AC0000000026"},
+    // {title: "刑事訴訟法", law_revision_id:"323AC0000000131_20250722_507AC0000000026"},
