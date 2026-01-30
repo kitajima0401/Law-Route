@@ -17,17 +17,6 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  favorites:[
-    {
-      law_revision_id: {
-        type: String,
-      },
-      addedAt: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ]
 })
 
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
