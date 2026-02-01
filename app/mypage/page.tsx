@@ -7,6 +7,12 @@ import { Container, Box, Typography, List, ListItem, Button } from "@mui/materia
 const Mypage = () => {
   const {loginUserEmail, isLoading} = useAuth()
   const [recent, setRecent] = useState<any>(null)
+  const router = useRouter()
+  const [bookmarks, setBookmarks] = useState<any[]>([])
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("articleBookmarks") || "[]")
+    setBookmarks(data)
+  }, [])
   useEffect(() => {
     const data = localStorage.getItem("recentTopic")
     if (data) {
@@ -25,7 +31,11 @@ const Mypage = () => {
   }
   
 
-  const router = useRouter()
+  const removeBookmark = (bmToRemove: any) => {
+    const updated = bookmarks.filter( (b) => !( b.law === bmToRemove.law && b.topic === bmToRemove.topic && b.num === bmToRemove.num && b.revision === bmToRemove.revision ) )
+    setBookmarks(updated)
+    localStorage.setItem("articleBookmarks", JSON.stringify(updated))
+  }
   
   return(
     <Container maxWidth="sm" sx={{py: 12}}>
@@ -54,13 +64,50 @@ const Mypage = () => {
           </Box>
         )} 
 
-        <List>
-          <ListItem sx={{ position: 'relative', bgcolor: 'background.paper', borderRadius: 2, mb: 1 }}>
-            {/* お気に入り登録した法令IDをfetchしたい
-            schemaにrevision_idを入れたい。 */}
-            あなたの登録した法令：
-          </ListItem>
-        </List>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          ブックマークした条文：{bookmarks.length}件
+        </Typography>
+        {bookmarks.length===0&&(
+          <Typography>ブックマークした条文はありません</Typography>
+        )}
+        {bookmarks.length>0&&(
+           <List>
+           {bookmarks.map((bm, idx) => (
+             <ListItem key={idx} sx={{ borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", }} >
+               <Box>
+                 <Typography sx={{ fontWeight: "bold" }}>
+                   {bm.law} / {bm.topic}
+                 </Typography>
+                 <Typography sx={{ fontSize: 14, color: "gray" }}>
+                   第{bm.num}条
+                 </Typography>
+                 <Typography sx={{ fontSize: 12, color: "gray" }}>
+                   {new Date(bm.timestamp).toLocaleString()}
+                 </Typography>
+               </Box>
+               <Box sx={{ display: "flex", gap: 1 }}>
+                <Button variant="outlined" onClick={() => {
+                    router.push(
+                      `../topic?law=${encodeURIComponent(
+                        bm.law
+                      )}&topic=${encodeURIComponent(
+                        bm.topic
+                      )}&revision=${bm.revision}`
+                    )
+                  }}
+                >
+                  開く
+                </Button>
+                <Button variant="outlined" color="error" onClick={() => removeBookmark(bm)}
+                  >
+                    削除
+                  </Button>
+                </Box>
+             </ListItem>
+           ))}
+         </List>
+        )}
+
       </Box>
     </Container>
     

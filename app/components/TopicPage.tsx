@@ -1,5 +1,6 @@
 "use client"
 
+import useAuth from "../api/utils/useAuth"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { 
@@ -129,7 +130,7 @@ export default function TopicPage(){
 
     const[articles, setArticles]=useState<any[]>([])
     const [loading, setLoading] = useState(true)
-
+    const {loginUserEmail} = useAuth()
     const law = lawItems.find((l)=>l.title === lawTitle)
     const topic = law?.items.flatMap((i)=>i.topics).find((t)=>t.title===topicTitle)
     const [bookmarks, setBookmarks] = useState<any[]>([])
@@ -232,8 +233,6 @@ export default function TopicPage(){
                                             {titleText}
                                         </Typography>
                                     )}
-                                    {/* ブックマーク登録ボタンここにいれたい */}
-                                    
                                 </Box>
                             </AccordionSummary>
 
@@ -247,7 +246,9 @@ export default function TopicPage(){
                                     onClick={toggleBookmark}
                                     sx={{ mt: 1 }}
                                 >
-                                    {isBookmarked ? "ブックマーク削除" : "ブックマーク登録"}
+                                    {!loginUserEmail ? "ログインして、ブックマーク登録をしましょう" : (
+                                        isBookmarked ? "ブックマーク削除" : "ブックマーク登録"
+                                    )}
                                 </Button>
                             </AccordionDetails>
                         </Accordion>
