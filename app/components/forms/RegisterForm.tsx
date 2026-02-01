@@ -15,7 +15,7 @@ const RegisterForm = () => {
   }
 
   return(
-    <Container maxWidth="sm" sx={{mt: 8, minHeight: "100vh"}}>
+    <Container maxWidth="sm" sx={{pt:12, mt: 8, minHeight: "100vh"}}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{display: "flex", flexDirection: "column", gap: 3}}>
         <Typography variant="h4" component="h1" align="center" gutterBottom fontWeight="bold">新規登録</Typography>
         <TextField variant="outlined" {...register("name")} label="ユーザーネーム" error={!!errors.name} helperText={errors.name?.message} disabled={registerMutation.isPending} />

@@ -17,7 +17,7 @@ const LoginForm = () => {
   }
 
   return(
-    <Container maxWidth="sm" sx={{mt: 8, minHeight: "100vh"}}>
+    <Container maxWidth="sm" sx={{pt:12, mt: 8, minHeight: "100vh"}}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{display: "flex", flexDirection: "column", gap: 3}}  >
         <Typography variant="h4" component="h1" align="center" gutterBottom fontWeight="bold">ログイン</Typography>
 
