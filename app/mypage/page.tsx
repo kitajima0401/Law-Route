@@ -35,6 +35,7 @@ const Mypage = () => {
     const updated = bookmarks.filter( (b) => !( b.law === bmToRemove.law && b.topic === bmToRemove.topic && b.num === bmToRemove.num && b.revision === bmToRemove.revision ) )
     setBookmarks(updated)
     localStorage.setItem("articleBookmarks", JSON.stringify(updated))
+    window.dispatchEvent(new Event("bookmarks-updated"))
   }
   
   return(

@@ -197,26 +197,31 @@ export default function TopicPage(){
                         b.num === num && 
                         b.revision === revision )
                     const toggleBookmark = () => {
-                         let updated
-                          if (isBookmarked) {
-                           updated = bookmarks.filter( (b) => 
-                            !( 
-                                b.law === law.title && 
+                        let updated
+                        if (isBookmarked) {
+                            updated = bookmarks.filter(
+                                (b) => 
+                                !(b.law === law.title && 
                                 b.topic === topic.title &&
                                 b.num === num && 
                                 b.revision === revision 
-                            ) ) } else { 
-                                updated = 
-                                [ ...bookmarks, { 
+                                ) 
+                            ) 
+                        } else { 
+                            updated = [ 
+                                ...bookmarks, { 
                                     law: law.title, 
                                     topic: topic.title, 
                                     num, 
                                     revision, 
                                     timestamp: Date.now(), 
-                                }, ] 
-                            } 
-                          setBookmarks(updated) 
-                          localStorage.setItem("articleBookmarks", JSON.stringify(updated)) }
+                                }, 
+                            ]
+                        } 
+                        setBookmarks(updated) 
+                        localStorage.setItem("articleBookmarks", JSON.stringify(updated)) 
+                        window.dispatchEvent(new Event("bookmarks-updated"))
+                    }
 
                     return(
                         <Accordion key={idx} sx={{mb:2}}>

@@ -13,9 +13,16 @@ const Header = () => {
   const [bookmarks, setBookmarks] = useState<any[]>([])
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("articleBookmarks") || "[]")
-    setBookmarks(data)
+    const load = () => {
+      const data = JSON.parse(localStorage.getItem("articleBookmarks") || "[]")
+      setBookmarks(data)
+    }
+  
+    load()
+    window.addEventListener("bookmarks-updated", load)
+    return () => window.removeEventListener("bookmarks-updated", load)
   }, [])
+  
   return(
     <>
       <AppBar position="fixed" color="default" >
