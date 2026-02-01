@@ -94,9 +94,6 @@ const Results = ({ results, keyword, isLoading }: Props) => {
                 >
                   本文を表示
                 </Button>
-                <Button component={Link} href="/mypage" variant="outlined">
-                  お気に入り登録
-                </Button>
               </Stack>
             </CardContent>
           </Card>
