@@ -1,6 +1,9 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import useAuth from "../api/utils/useAuth"
+import { toast } from "react-toastify";
 import {
   Container,
   Typography,
@@ -14,9 +17,6 @@ import {
   AccordionDetails,
 } from "@mui/material"
 import { ChevronRight } from "@mui/icons-material"
-
-
-    
 
 
     export type Topic = {
@@ -729,13 +729,10 @@ import { ChevronRight } from "@mui/icons-material"
       }
     ]
       
-      
-      
-    
-    
 
 export const LawMenu = () => {
   const router = useRouter()
+  const { loginUserEmail } = useAuth()
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
@@ -769,6 +766,17 @@ export const LawMenu = () => {
                         <ListItem key={topic.title} disablePadding>
                         <ListItemButton
                           onClick={() => {
+                            if(!loginUserEmail && law.title!=="民法"){
+                              toast.success("ログインすることで、全法令を閲覧できます")
+                              return
+                            }
+                            const recent = { 
+                              law: law.title, 
+                              topic: topic.title, 
+                              revision: law.law_revision_id, 
+                              timestamp: Date.now(), 
+                            };
+                            localStorage.setItem("recentTopic", JSON.stringify(recent))
                             router.push(`/topic?law=${encodeURIComponent(law.title)}&topic=${encodeURIComponent(topic.title)}&revision=${law.law_revision_id}`);
                           }}
                         >
