@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const useAuth = () => {
   const [loginUserEmail, setLoginUserEmail] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
+  const [toastshown, setToastshown] = useState(false)
   const router = useRouter()
   const pathName = usePathname()
 
@@ -22,7 +23,9 @@ const useAuth = () => {
       if(!token){
         if(pathName === "/mypage"){
           router.push("/login")
-          toast.success("ログインして、マイページを作成しましょう")
+          toast.success("ログインして、マイページを作成しましょう",{
+            toastId: "redirect-mypage-login",
+          })
         }
         setIsLoading(false)
         return
@@ -40,7 +43,6 @@ const useAuth = () => {
         console.log("JWT verification failed:", error)
         if(pathName === "/mypage"){
           router.push("/login")
-          // toast.success("ログインして、マイページを作成しましょう")
         }
         setIsLoading(false)
       }
