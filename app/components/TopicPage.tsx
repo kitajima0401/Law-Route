@@ -4,7 +4,8 @@ import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { 
     Box, 
-    Typography, 
+    Typography,
+    Button,
     Accordion, 
     AccordionSummary, 
     AccordionDetails, 
@@ -131,7 +132,13 @@ export default function TopicPage(){
 
     const law = lawItems.find((l)=>l.title === lawTitle)
     const topic = law?.items.flatMap((i)=>i.topics).find((t)=>t.title===topicTitle)
-    
+    const [bookmarks, setBookmarks] = useState<any[]>([])
+
+    useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("articleBookmarks") || "[]")
+    setBookmarks(data)
+    }, [])
+
     useEffect(()=>{
         if(!revision||!topic) return;
 
@@ -182,6 +189,34 @@ export default function TopicPage(){
                     const {capText, titleText} = extractCaption(a)
                     const paragraphs = a.children?.filter((c:any)=>c.tag==="Paragraph")||[];
 
+                    const isBookmarked = 
+                    bookmarks.some( (b) => 
+                        b.law === law.title && 
+                        b.topic === topic.title && 
+                        b.num === num && 
+                        b.revision === revision )
+                    const toggleBookmark = () => {
+                         let updated
+                          if (isBookmarked) {
+                           updated = bookmarks.filter( (b) => 
+                            !( 
+                                b.law === law.title && 
+                                b.topic === topic.title &&
+                                b.num === num && 
+                                b.revision === revision 
+                            ) ) } else { 
+                                updated = 
+                                [ ...bookmarks, { 
+                                    law: law.title, 
+                                    topic: topic.title, 
+                                    num, 
+                                    revision, 
+                                    timestamp: Date.now(), 
+                                }, ] 
+                            } 
+                          setBookmarks(updated) 
+                          localStorage.setItem("articleBookmarks", JSON.stringify(updated)) }
+
                     return(
                         <Accordion key={idx} sx={{mb:2}}>
                             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
@@ -197,6 +232,8 @@ export default function TopicPage(){
                                             {titleText}
                                         </Typography>
                                     )}
+                                    {/* ブックマーク登録ボタンここにいれたい */}
+                                    
                                 </Box>
                             </AccordionSummary>
 
@@ -204,6 +241,14 @@ export default function TopicPage(){
                                 {paragraphs.map((p:any, i:number)=>
                                     renderParagraph(p, `p-${num}-${i}`)
                                 )}
+                                <Button
+                                    variant="outlined"
+                                    color={isBookmarked ? "error" : "primary"}
+                                    onClick={toggleBookmark}
+                                    sx={{ mt: 1 }}
+                                >
+                                    {isBookmarked ? "ブックマーク削除" : "ブックマーク登録"}
+                                </Button>
                             </AccordionDetails>
                         </Accordion>
                     )
