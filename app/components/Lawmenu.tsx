@@ -1,7 +1,6 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import useAuth from "../api/utils/useAuth"
 import { toast } from "react-toastify";
 import {
@@ -277,14 +276,8 @@ export const LawMenu = () => {
                             };
                             localStorage.setItem("recentTopic", JSON.stringify(recent))
 
-                            const topicTitle = if(law.title==="行政法"){
-                              //subtitle(行政手続法とか表示したい)
-                            }else{
-                              law.title
-                            }
-
                             router.push(
-                              `/topic?law=${encodeURIComponent(law.title)}&topic=${encodeURIComponent(topicTitle)}&revision=${encodeURIComponent(revision)}`
+                              `/topic?law=${encodeURIComponent(law.title)}&topic=${encodeURIComponent(topic.title)}&revision=${encodeURIComponent(revision)}`
                             );
                           }}
                         >
