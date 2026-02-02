@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 const useAuth = () => {
   const [loginUserEmail, setLoginUserEmail] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
-  const [toastshown, setToastshown] = useState(false)
   const router = useRouter()
   const pathName = usePathname()
 
