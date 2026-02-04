@@ -17,6 +17,14 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  resetToken:{
+    type: String,
+    default: null,
+  },
+  resetTokenExpires: {
+    type: Date,
+    default: null,
+  },
 })
 
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)

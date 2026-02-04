@@ -26,10 +26,10 @@ const LoginForm = () => {
 
         <TextField variant="outlined" label="メールアドレス" error={!!errors.email} {...register("email")} helperText={errors.email?.message} disabled={loginMutation.isPending} />
 
-        <TextField variant="outlined" type="password" label="パスワード" error={!!errors.email} {...register("password")} helperText={errors.password?.message} disabled={loginMutation.isPending} />
+        <TextField variant="outlined" type="password" label="パスワード" error={!!errors.password} {...register("password")} helperText={errors.password?.message} disabled={loginMutation.isPending} />
 
         <Box sx={{textAlign: "right", mt: -1}}>
-          <Typography variant="body2" color="primary" onClick={()=>router.push("../forgot-password")} sx={{cursor: "pointer"}}>
+          <Typography variant="body2" color="primary" onClick={()=>router.push("/forgot-password")} sx={{cursor: "pointer"}}>
             パスワードを忘れた方はこちら
           </Typography>
         </Box>

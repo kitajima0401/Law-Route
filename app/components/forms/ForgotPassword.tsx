@@ -9,7 +9,7 @@ import { toast } from "react-toastify"
 interface ForgotPasswordProps{
     onSuccess?:()=>void
 }
-export default function ForgotPassword({onSuccess}:ForgotPasswordProps){
+export default function ForgotPassword({onSuccess}:ForgotPasswordProps={}){
     const router = useRouter()
     const [email, setEmail]=useState<string>("")
     const mutation = useMutation({
@@ -21,7 +21,7 @@ export default function ForgotPassword({onSuccess}:ForgotPasswordProps){
             if(onSuccess){
                 onSuccess()
             }else{
-                router.push("../login")
+                router.push("/login")
             }
         },
         onError:(err: any)=>{
