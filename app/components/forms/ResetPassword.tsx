@@ -16,7 +16,6 @@ const resetSchema = z.object({
     path: ["confirmPassword"]
 })
 
-type ResetForm = z.infer<typeof resetSchema>
 
 export default function ResetPasswordPage(){
     const router = useRouter()
