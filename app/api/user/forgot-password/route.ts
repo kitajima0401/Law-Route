@@ -30,7 +30,7 @@ export async function POST(req: NextRequest){
         user.resetTokenExpires = expiresAt
         await user.save()
 
-        const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`
+        const resetUrl = `${process.env.APP_URL}/reset-password?token=${resetToken}`
         await resend.emails.send({
             from: `"law-route"<noreply@law-route.jp>`,
             to: user.email,
