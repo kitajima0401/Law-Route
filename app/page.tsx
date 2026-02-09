@@ -44,7 +44,7 @@ const Homepage = () => {
         </Typography>
         <LawMenu/>
         <Typography variant="h6" align="center" color="text.secondary" sx={{mt:2, mb:8}}>
-          キーワードを入力して、法令を検索できます
+          キーワードを入力して、法令を検索できます githubactions追加！
         </Typography>
         <SearchForm onSearch={handleSearch} isLoading={isLoading}/>
         <Results results={results?.items ?? []} keyword={keyword} isLoading={isLoading}/>
