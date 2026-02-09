@@ -37,7 +37,7 @@ export default function ForgotPassword({onSuccess}:ForgotPasswordProps={}){
 
     return(
         <Box component="form" onSubmit={handleSubmit} sx={{display: "flex", flexDirection:"column", gap:3, width:"100%"}}>
-            <Typography variant="h5" align="center"sx={{py: 12}} >
+            <Typography variant="h5" align="center"sx={{pt: 12}} >
                 パスワードをリセット
             </Typography>
             <TextField 
