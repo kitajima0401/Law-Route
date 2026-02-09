@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   Box,
@@ -23,6 +23,7 @@ type Props = {
 };
 
 const Results = ({ results, keyword, isLoading }: Props) => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading) {
@@ -88,8 +89,7 @@ const Results = ({ results, keyword, isLoading }: Props) => {
 
               <Stack direction="row" spacing={2} justifyContent="flex-end" mt={3}>
                 <Button
-                  component={Link}
-                  href={`/lawDetailPage/${result.revision_info.law_revision_id}`}
+                  onClick={()=>router.push(`/law-detail-page/${result.revision_info.law_revision_id}`)}
                   variant="outlined"
                 >
                   本文を表示
